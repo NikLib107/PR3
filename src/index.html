@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управління Розкладом</title>
+    <script defer src="index.js"></script> <!-- Підключаємо наш скрипт -->
+</head>
+<body>
+    <h1>Управління Розкладом</h1>
+
+    <!-- Додавання професора -->
+    <section>
+        <h2>Додати Професора</h2>
+        <form id="add-professor-form">
+            <label for="professor-id">ID Професора:</label>
+            <input type="number" id="professor-id" required>
+            <br>
+            <label for="professor-name">Ім'я Професора:</label>
+            <input type="text" id="professor-name" required>
+            <br>
+            <label for="professor-department">Кафедра:</label>
+            <input type="text" id="professor-department" required>
+            <br>
+            <button type="submit">Додати Професора</button>
+        </form>
+    </section>
+
+    <!-- Додавання аудиторії -->
+    <section>
+        <h2>Додати Аудиторію</h2>
+        <form id="add-classroom-form">
+            <label for="classroom-number">Номер Аудиторії:</label>
+            <input type="text" id="classroom-number" required>
+            <br>
+            <button type="submit">Додати Аудиторію</button>
+        </form>
+    </section>
+
+    <!-- Додавання курсу -->
+    <section>
+        <h2>Додати Курс</h2>
+        <form id="add-course-form">
+            <label for="course-id">ID Курсу:</label>
+            <input type="number" id="course-id" required>
+            <br>
+            <label for="course-name">Назва Курсу:</label>
+            <input type="text" id="course-name" required>
+            <br>
+            <label for="course-type">Тип Курсу:</label>
+            <select id="course-type" required>
+                <option value="Lecture">Лекція</option>
+                <option value="Seminar">Семінар</option>
+                <option value="Lab">Лабораторна</option>
+                <option value="Practice">Практика</option>
+            </select>
+            <br>
+            <button type="submit">Додати Курс</button>
+        </form>
+    </section>
+
+    <!-- Додавання уроку -->
+    <section>
+        <h2>Додати Урок</h2>
+        <form id="add-lesson-form">
+            <label for="lesson-course-id">ID Курсу:</label>
+            <input type="number" id="lesson-course-id" required>
+            <br>
+            <label for="lesson-professor-id">ID Професора:</label>
+            <input type="number" id="lesson-professor-id" required>
+            <br>
+            <label for="lesson-classroom-number">Номер Аудиторії:</label>
+            <input type="text" id="lesson-classroom-number" required>
+            <br>
+            <label for="lesson-time-slot">Часовий Слот:</label>
+            <select id="lesson-time-slot" required>
+                <option value="8:30-10:00">8:30-10:00</option>
+                <option value="10:15-11:45">10:15-11:45</option>
+                <option value="12:15-13:45">12:15-13:45</option>
+                <option value="14:00-15:30">14:00-15:30</option>
+                <option value="15:45-17:15">15:45-17:15</option>
+            </select>
+            <br>
+            <label for="lesson-day-of-week">День Тижня:</label>
+            <select id="lesson-day-of-week" required>
+                <option value="Monday">Понеділок</option>
+                <option value="Tuesday">Вівторок</option>
+                <option value="Wednesday">Середа</option>
+                <option value="Thursday">Четвер</option>
+                <option value="Friday">П'ятниця</option>
+            </select>
+            <br>
+            <button type="submit">Додати Урок</button>
+        </form>
+        <div id="add-lesson-result"></div>
+    </section>
+
+    <!-- Отримання вільних аудиторій -->
+    <section>
+        <h2>Отримати Вільні Аудиторії</h2>
+        <form id="available-classrooms-form">
+            <label for="timeslot">Часовий Слот:</label>
+            <select id="timeslot" required>
+                <option value="8:30-10:00">8:30-10:00</option>
+                <option value="10:15-11:45">10:15-11:45</option>
+                <option value="12:15-13:45">12:15-13:45</option>
+                <option value="14:00-15:30">14:00-15:30</option>
+                <option value="15:45-17:15">15:45-17:15</option>
+            </select>
+            <br>
+            <label for="day-of-week">День Тижня:</label>
+            <select id="day-of-week" required>
+                <option value="Monday">Понеділок</option>
+                <option value="Tuesday">Вівторок</option>
+                <option value="Wednesday">Середа</option>
+                <option value="Thursday">Четвер</option>
+                <option value="Friday">П'ятниця</option>
+            </select>
+            <br>
+            <button type="submit">Отримати Вільні Аудиторії</button>
+        </form>
+        <div id="available-classrooms-result"></div>
+    </section>
+
+    <!-- Отримання розкладу професора -->
+    <section>
+        <h2>Отримати Розклад Професора</h2>
+        <form id="professor-schedule-form">
+            <label for="professor-schedule-id">ID Професора:</label>
+            <input type="number" id="professor-schedule-id" required>
+            <br>
+            <button type="submit">Отримати Розклад</button>
+        </form>
+        <div id="professor-schedule-result"></div>
+    </section>
+
+    <!-- Переназначення аудиторії -->
+    <section>
+        <h2>Переназначити Аудиторію</h2>
+        <form id="reassign-classroom-form">
+            <label for="lesson-id">ID Заняття:</label>
+            <input type="number" id="lesson-id" required>
+            <br>
+            <label for="new-classroom-number">Новий Номер Аудиторії:</label>
+            <input type="text" id="new-classroom-number" required>
+            <br>
+            <button type="submit">Переназначити Аудиторію</button>
+        </form>
+    </section>
+
+    <script>
+        // Додавання професора
+        document.getElementById('add-professor-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const id = Number(document.getElementById('professor-id').value);
+            const name = document.getElementById('professor-name').value;
+            const department = document.getElementById('professor-department').value;
+            addProfessor({ id, name, department });
+            alert('Професора додано');
+        });
+
+        // Додавання аудиторії
+        document.getElementById('add-classroom-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const number = document.getElementById('classroom-number').value;
+            addClassroom({ number });
+            alert('Аудиторію додано');
+        });
+
+        // Додавання курсу
+        document.getElementById('add-course-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const id = Number(document.getElementById('course-id').value);
+            const name = document.getElementById('course-name').value;
+            const type = document.getElementById('course-type').value;
+            addCourse({ id, name, type });
+            alert('Курс додано');
+        });
+
+        // Додавання уроку
+        document.getElementById('add-lesson-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const courseId = Number(document.getElementById('lesson-course-id').value);
+            const professorId = Number(document.getElementById('lesson-professor-id').value);
+            const classroomNumber = document.getElementById('lesson-classroom-number').value;
+            const timeSlot = document.getElementById('lesson-time-slot').value;
+            const dayOfWeek = document.getElementById('lesson-day-of-week').value;
+
+            const lesson = {
+                courseId,
+                professorId,
+                classroomNumber,
+                timeSlot,
+                dayOfWeek
+            };
+
+            const conflict = validateLesson(lesson);
+
+            if (conflict) {
+                document.getElementById('add-lesson-result').textContent = 'Конфлікт: ' + conflict.type;
+            } else {
+                addLesson(lesson);
+                document.getElementById('add-lesson-result').textContent = 'Урок додано!';
+            }
+        });
+
+        // Отримання вільних аудиторій
+        document.getElementById('available-classrooms-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const timeSlot = document.getElementById('timeslot').value;
+            const dayOfWeek = document.getElementById('day-of-week').value;
+            const availableClassrooms = findAvailableClassrooms(timeSlot, dayOfWeek);
+            document.getElementById('available-classrooms-result').textContent = 'Вільні аудиторії: ' + availableClassrooms.join(', ');
+        });
+
+        // Отримання розкладу професора
+        document.getElementById('professor-schedule-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const professorId = Number(document.getElementById('professor-schedule-id').value);
+            const schedule = getProfessorSchedule(professorId);
+            document.getElementById('professor-schedule-result').textContent = JSON.stringify(schedule, null, 2);
+        });
+
+        // Переназначення аудиторії
+        document.getElementById('reassign-classroom-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const lessonId = Number(document.getElementById('lesson-id').value);
+            const newClassroomNumber = document.getElementById('new-classroom-number').value;
+            const success = reassignClassroom(lessonId, newClassroomNumber);
+            alert(success ? 'Аудиторію переназначено' : 'Переназначення не вдалося');
+        });
+    </script>
+</body>
+</html>
